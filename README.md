@@ -1,5 +1,5 @@
 # IP2019
 
-This is a test folder for IntroProg2019 course
-Remote change
+This is the repository for the "Introduction to Programming 2019" course
+Clément Mazet-Sonilhac, Sciences Po Paris
 
