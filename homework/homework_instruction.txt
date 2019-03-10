@@ -1,0 +1,15 @@
+This homework is based on the git-game
+  (https://github.com/git-game/git-game)
+
+Pre-requisite: the instructions bellow assume that you have already forked IntroProg2018.
+
+To complete this homework:
+
+    Go on the Github page of the git-game (https://github.com/git-game/git-game)
+    Do the game
+    For each level of the game, write your solution in a .txt file named YOUR-NAME-git-game-solution.txt
+    Once you are done with the game, put the .txt file in this directory (i.e., in IP2019/homework/ on your local clone)
+    Commit and push this .txt file to your remote repository these changes (only the .txt file pls!)
+    Open a pull request on my repository
+
+Remember: the easier it is for me to understand what you've done, the more points you'll get from this homework!
