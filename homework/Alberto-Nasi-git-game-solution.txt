@@ -1,0 +1,72 @@
+Level 1
+
+Clone git-game locally through a direct 'clone' command
+'Git log' to check the commits history
+Notice the commit called 'Hello world' (solution of the riddle) and the number next to it
+'Git checkout [number]' and it will switch to that particular commit
+Level 1 solved
+
+Level 2 
+
+Control the different branches with 'git branch -a'
+Notice a branch called 'bug' (solution of the riddle)
+'Git checkout bug'
+Level 2 solved
+
+Level 3
+
+To check the contributors to a specific file 'git blame coop.cpp'
+Notice that there are two contributors, one of them in LinusTorvalds2014 who inserted an infinite loop in the program
+Checkout the branch called LinusTorvald2014
+Level 3 solved
+
+Level 4
+
+Type 'ls -a' to view the hidden files of the directory
+Open the file .gitignore
+Level 4 solved
+
+Level 5
+
+Back to the list of branches
+Checkout to the branch 'tree' (solution of the riddle)
+Level 5 solved
+
+Level 6
+
+Run './outputclue.sh nextclue_input.cpp'
+Level 6 solved
+
+Level 7 
+
+Try to merge the 'tree' branch with the 'code4life' branch. The command is 'git merge code4life' (while you're on the tree branch)
+Git will put in evidence a conflict with the 'nextclue_input.cpp' file
+Open 'nextclue_input.cpp' on a text editor (mine is Atom) and cancel the change made by the user (between <<<<< and ======), then add and commit
+Run './outputclue.sh nextclue_input.cpp' again
+Open the mouse branch
+Level 7 solved
+
+Level 8
+
+Explore previous branches to find another 'remember' file.
+Found it in 'bug'
+Use the command diff to compare the two 'remember' file. The command is (while on the mouse branch) 'git diff mouse bug ./remember'
+The output indicates that part of the differences between the two files point to a branch called 'Henry'
+Level 8 solved
+
+Level 9
+
+Checkout to 'Henry' branch and notice through the 'tag' command that there is a tag named 'Henry'. It seems that the checkout command propritises tags instead of branches.
+Try to rename the tag (could also delete, but don't really trust deleting without a backup on code I didn't write)
+Therefore copy the tag with the command 'git tag Henry Henry1' (creates a new identical tag named Henry1)
+Then delete the old tag with the command 'git tag -d Henry'
+Checkout to 'Henry'
+Level 9 solved
+
+Level 10
+
+Add a new upstream, type 'git remote add upstream https://github.com/drami025/git-game.git' 
+Then sync the local repository with the upstream one.
+Git fetch upstream and checkout to master
+Then merge with 'upstream/master'
+Level 10 solved
