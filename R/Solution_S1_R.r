@@ -38,3 +38,57 @@ rowMeans(d[1:10,])
 
 plot(apply(d, 2, max), xlab = "day", ylab = "maximum", main = "maximum inflammation by day")
 boxplot(d, main = "Summary")
+
+# Exercise 2:
+min_inf = apply(d,2,min)
+plot(min_inf, xlab = "day", ylab = "min", main = "min inflammation by day")
+
+
+# Exercise 3:
+fk <- function(temp_F) {
+  temp_K <- ((temp_F - 32) * (5 / 9)) + 273.15
+  return(temp_K)
+}
+
+kc <- function(temp_K) {
+  temp_C <- temp_K - 273.15
+  return(temp_C)
+}
+
+fc <- function(temp_F) {
+  temp_K <- fk(temp_F)
+  temp_C <- kc(temp_K)
+  return(temp_C)
+}
+
+# Ex 5:
+fence <- function(original, wrapper) {
+  answer <- c(wrapper, original, wrapper)
+  return(answer)
+}
+
+# Ex 5bis
+outside <- function(v) {
+  first <- v[1]
+   last <- v[length(v)]
+   answer <- c(first, last)
+   return(answer)
+}
+
+# Test:
+fence(vc, vp)
+outside(answer)
+
+# Final exercise:
+
+analyze <- function(filename) {
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  d <- read.csv(file = filename, header = FALSE)
+  avg_i <- apply(dat, 2, mean)
+  plot(avg_i)
+  max_i <- apply(dat, 2, max)
+  plot(max_i)
+  min_i <- apply(dat, 2, min)
+  plot(min_i)
+}
