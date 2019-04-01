@@ -6,7 +6,7 @@ weight * 2
 # Analyze data with R:
 
 # Load the data and set directory:
-setwd("C:/Users/Cl√©ment/Desktop/Github/IP2019/R/r-novice-inflammation-data/data")
+setwd("C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data")
 d = read.csv(file = "inflammation-01.csv", header = FALSE)
 
 # Display the 3 first lines with "head":
@@ -79,16 +79,134 @@ outside <- function(v) {
 fence(vc, vp)
 outside(answer)
 
+
+#####################################################################
+#####################################################################
 # Final exercise:
 
 analyze <- function(filename) {
   # Plots the average, min, and max inflammation over time.
   # Input is character string of a csv file.
   d <- read.csv(file = filename, header = FALSE)
-  avg_i <- apply(dat, 2, mean)
+  avg_i <- apply(d, 2, mean)
   plot(avg_i)
-  max_i <- apply(dat, 2, max)
+  max_i <- apply(d, 2, max)
   plot(max_i)
-  min_i <- apply(dat, 2, min)
+  min_i <- apply(d, 2, min)
   plot(min_i)
+}
+
+pdf("inflammation-01.pdf")
+analyze("C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data/inflammation-01.csv", 1)
+dev.off()
+
+
+
+
+analyze_all <- function(pattern) {
+  # Runs the function analyze for each file in the current working directory
+  # that contains the given pattern.
+  j = 0
+  filenames <- list.files(path = "C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern = glob2rx(pattern), full.names = TRUE)
+  for (f in filenames) {
+    j = j+1
+    analyze(f,j)
+  }
+}
+
+list.files(path = "C:/Users/ClÈment/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  glob2rx("*inf*.csv") , full.names = TRUE)
+list.files(path = "C:/Users/ClÈment/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  "inflammation-[0-9]{2}.csv")
+list.files(path = "C:/Users/ClÈment/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  "inflammation*.csv")
+
+
+pdf("inflammation-all.pdf")
+analyze_all("*inf*.csv")
+dev.off()
+
+View(cars)
+
+## Ex3:
+
+sign<-function(arg1){
+if (arg1 < 0){return("Negative")}
+else if (arg1 == 0){print("Null")}
+else {print("Positive")}
+}
+
+sign(-6)
+
+sign2<-function(arg1 = 1, arg2= 1){
+  if (arg1 < 0 & arg2 < 0){return("Both negative")}
+  else if (arg1 > 0 & arg2 > 0){print("Both positive")}
+  else {print("Different sign")}
+}
+
+sign2(-6,-1)
+
+# Exercice 4 (Hard!): Introduction to Programming 
+filenames <- list.files(path = "C:/Users/Cl√©ment/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern = "inflammation-[0-9]{2}.csv", full.names = TRUE)
+
+filename_max <- "" # filename where the maximum average inflammation patient is found
+patient_max <- 0 # index (row number) for this patient in this file
+average_inf_max <- 0 # value of the average inflammation score for this patient
+
+for (f in filenames) {
+  d <- read.csv(file = f, header = FALSE)
+  d.means <- apply(d, 1, mean)
+  for (patient_index in 1:length(d.means)){
+    patient_average_inf <- d.means[patient_index]
+    if (patient_average_inf > average_inf_max) {
+  		average_inf_max <- patient_average_inf
+  		filename_max <- f
+  		patient_max <- patient_index
+		}
+  }
+}
+print(filename_max)
+print(patient_max)
+print(average_inf_max)
+
+# Exercice 4 (Hard!): Introduction to Programming 
+filenames <- list.files(path = "C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern = "inflammation-[0-9]{2}.csv", full.names = TRUE)
+
+filename_max <- "" # filename where the maximum average inflammation patient is found
+patient_max <- 0 # index (row number) for this patient in this file
+average_inf_max <- 0 # value of the average inflammation score for this patient
+
+for (f in filenames) {
+  d <- read.csv(file = f, header = FALSE)
+  d.means <- apply(d, 1, mean)
+  for (patient_index in 1:length(d.means)){
+    patient_average_inf <- d.means[patient_index]
+    if (patient_average_inf > average_inf_max) {
+      average_inf_max <- patient_average_inf
+      filename_max <- f
+      patient_max <- patient_index
+    }
+  }
+}
+print(filename_max)
+print(patient_max)
+print(average_inf_max)
+
+## Ex 5: Rewrite analize()
+analyze <- function(filename, output = NULL) {
+  # Plots the average, min, and max inflammation over time.
+  # Input:
+  #    filename: character string of a csv file
+  #    output: character string of pdf file for saving
+  if (!is.null(output)) {
+    pdf(output)
+  }
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(d, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(d, 2, max)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(d, 2, min)
+  plot(min_day_inflammation)
+  
+  if (!is.null(output)) {
+    dev.off()
+  }
 }
