@@ -96,6 +96,8 @@ analyze <- function(filename) {
   plot(min_i)
 }
 
+analyze(path)
+
 pdf("inflammation-01.pdf")
 analyze("C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data/inflammation-01.csv", 1)
 dev.off()
@@ -106,17 +108,15 @@ dev.off()
 analyze_all <- function(pattern) {
   # Runs the function analyze for each file in the current working directory
   # that contains the given pattern.
-  j = 0
-  filenames <- list.files(path = "C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern = glob2rx(pattern), full.names = TRUE)
+  filenames <- list.files(path = "C:/.../data", pattern = glob2rx(pattern), full.names = TRUE)
   for (f in filenames) {
-    j = j+1
-    analyze(f,j)
+    analyze(f)
   }
 }
 
-list.files(path = "C:/Users/Clément/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  glob2rx("*inf*.csv") , full.names = TRUE)
-list.files(path = "C:/Users/Clément/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  "inflammation-[0-9]{2}.csv")
-list.files(path = "C:/Users/Clément/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  "inflammation*.csv")
+list.files(path = "C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  glob2rx("*inf*.csv") , full.names = TRUE)
+list.files(path = "C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  "inflammation-[0-9]{2}.csv")
+list.files(path = "C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data", pattern =  "inflammation*.csv")
 
 
 pdf("inflammation-all.pdf")
