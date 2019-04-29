@@ -210,3 +210,114 @@ analyze <- function(filename, output = NULL) {
     dev.off()
   }
 }
+
+
+######################################################
+dt = data.frame(id = letters[1:10], x =0, y = 0)
+for (i in 1:10){
+  if(i == 5){dt$x[i] = 1}
+  else{dt$x[i] = 0}
+  dt$y[i] = i*i
+dt$z = dt$x + dt$y
+  }
+dt
+dt$id
+typeof(dt$id)
+
+######################################################
+## 28.04.2019 -- Econometrics
+######################################################
+
+install.packages("stringi")
+install.packages("ggplot2")
+
+require("magrittr")
+require("tidyverse")
+require("dplyr")
+require("AER")
+require("nycflights13")
+require("gapminder")
+require("Lahman")
+require("ggthemes")
+require("gridExtra")
+
+library("tidyverse")
+library("dplyr")
+library("AER")
+library("nycflights13")
+library("gapminder")
+library("Lahman")
+library("ggthemes")
+library("gridExtra")
+library("magrittr")
+
+
+x = seq(0,10,0.3)
+y =  2 + 3 * x + rnorm(length(x))
+plot(x~y)
+
+data("Journals", package = "AER")
+journals = as_tibble(Journals, package = "AER")
+
+
+journals <- journals %>% mutate(citeprice = price / citations)
+
+j_lm <- lm(log(subs) ~ log(price/citations), data = Journals)
+plot(log(subs) ~ log(price/citations), data = Journals)
+abline(j_lm)
+summary(j_lm)
+
+
+plot(subs~citations, data= Journals)
+
+journal_lm <- journals %>% lm(log(subs) ~ log(citeprice), data = .)
+summary(journal_lm)
+ggplot(journals, aes(x = log(citeprice), y = log(subs))) + geom_point() + stat_smooth(method = "lm", col = "tomato3")
+plot(journal_lm, which = 1)
+plot(journal_lm, which = 3)
+
+linearHypothesis(journal_lm, "log(citeprice) = 1")
+
+citep = price /citations
+
+ggplot(journals) + geom_point(aes(x = subs, y=citeprice))
+g = ggplot(journals)
+p1 = g + geom_histogram(aes(x=citeprice), fill= "tomato3")
+p2 = g + geom_histogram(aes(x=subs), fill= "tomato3")
+p3 = g + geom_histogram(aes(x=log(citeprice)), fill= "tomato3")
+p4 = g + geom_histogram(aes(x=log(subs)), fill= "tomato3")
+grid.arrange(p1,p2,p3,p4)
+
+ggplot(journals) + geom_point(aes(x = log(subs), y=log(citeprice)))
+
+## Ex 2:
+data("CPS1988", package = "AER")
+cps = as_tibble(CPS1988)
+cps
+
+cps_lm = cps %>% lm(log(wage) ~ experience + I(experience^2) + education + ethnicity, data =.)
+summary(cps_lm)
+
+cps_lm = cps %>% lm(log(wage) ~ experience + I(experience^2) + education + relevel(ethnicity, ref="afam"), data =.)
+summary(cps_lm)
+
+cps_lm = cps %>% lm(log(wage) ~ experience + I(experience^2) + education + ethnicity -1, data =.)
+summary(cps_lm)
+
+cps_lm = cps %>% lm(log(wage) ~ experience + I(experience^2) + education * ethnicity, data =.)
+summary(cps_lm)
+
+cps_lm = cps %>% lm(log(wage) ~ ethnicity / (experience + I(experience^2) + education), data =.)
+summary(cps_lm)
+
+jour_wls1 <- journals %>% lm(log(subs) ~ log(citeprice), data = ., weights = 1 / citeprice^2)
+plot(jour_wls1, which = 3)
+
+jour_lm <- lm(log(subs) ~ log(citeprice), data = journals)
+aux_reg <- lm(log(residuals(jour_lm)^2) ~ log(citeprice), data = journals)
+jour_fgls <- lm(log(subs) ~ log(citeprice), data = journals, weights = 1 / exp(fitted(aux_reg)))
+plot(jour_lm, which = 3)
+plot(jour_fgls, which = 3)
+
+install.packages("abc")
+require("abc")
