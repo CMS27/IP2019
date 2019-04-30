@@ -241,7 +241,8 @@ require("Lahman")
 require("ggthemes")
 require("gridExtra")
 
-library("tidyverse")
+library(abc)
+library(tidyverse)
 library("dplyr")
 library("AER")
 library("nycflights13")
@@ -272,13 +273,14 @@ plot(subs~citations, data= Journals)
 
 journal_lm <- journals %>% lm(log(subs) ~ log(citeprice), data = .)
 summary(journal_lm)
+
 ggplot(journals, aes(x = log(citeprice), y = log(subs))) + geom_point() + stat_smooth(method = "lm", col = "tomato3")
+
 plot(journal_lm, which = 1)
+plot(journal_lm, which = 2)
 plot(journal_lm, which = 3)
 
 linearHypothesis(journal_lm, "log(citeprice) = 1")
-
-citep = price /citations
 
 ggplot(journals) + geom_point(aes(x = subs, y=citeprice))
 g = ggplot(journals)
@@ -313,11 +315,48 @@ summary(cps_lm)
 jour_wls1 <- journals %>% lm(log(subs) ~ log(citeprice), data = ., weights = 1 / citeprice^2)
 plot(jour_wls1, which = 3)
 
+## STEP 1
 jour_lm <- lm(log(subs) ~ log(citeprice), data = journals)
+
+##STEP 2
 aux_reg <- lm(log(residuals(jour_lm)^2) ~ log(citeprice), data = journals)
+
+## STEP 3
 jour_fgls <- lm(log(subs) ~ log(citeprice), data = journals, weights = 1 / exp(fitted(aux_reg)))
+
 plot(jour_lm, which = 3)
 plot(jour_fgls, which = 3)
 
 install.packages("abc")
 require("abc")
+
+# -- Hackathon:
+
+dgp <- function(n){
+  
+  x = seq(0,n,1)
+  x1 = rnorm(length(x), 0, 1)
+  x2 = rnorm(length(x) , 0, 0.3)
+  y = 1 + 2 * x1 + x2
+  
+  datatest  <- tibble( 
+    x1 = x1,
+    x2 = x2,
+    y  = y
+  )
+  
+  return(datatest)
+}
+
+data = dgp(10000)
+
+data
+
+lm(y~x1, data=data)
+hist(data$x1, prob=T, breaks="FD")
+curve(dnorm(x), add=T)
+
+
+x2 = rbeta(10000, 0.5,0.5)
+plot(x2)      
+hist(x2)
