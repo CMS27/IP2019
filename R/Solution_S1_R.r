@@ -1,3 +1,5 @@
+MYTEST
+
 # R script
 
 weight = 5
