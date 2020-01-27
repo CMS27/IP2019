@@ -1,4 +1,5 @@
-MYTEST
+install.packages('IRkernel')
+IRkernel::installspec()
 
 # R script
 
@@ -8,8 +9,10 @@ weight * 2
 # Analyze data with R:
 
 # Load the data and set directory:
-setwd("C:/Users/Cl?ent/Desktop/Github/IP2019/R/r-novice-inflammation-data/data")
+setwd("C:/Users/cms27/Desktop/Github/IP2019/R/r-novice-inflammation-data/data")
 d = read.csv(file = "inflammation-01.csv", header = FALSE)
+
+install.packages('IRkernel')
 
 # Display the 3 first lines with "head":
 head(d, n = 3L)
@@ -337,11 +340,11 @@ require("abc")
 dgp <- function(n){
   
   x = seq(0,n,1)
-  x1 = rnorm(length(x), 0, 1)
-  x2 = rnorm(length(x) , 0, 0.3)
+  x1 = rnorm(length(x), 2, 0.1)
+  x2 = rnorm(length(x) , 0, 0.1)
   y = 1 + 2 * x1 + x2
   
-  datatest  <- tibble( 
+  datatest = tibble( 
     x1 = x1,
     x2 = x2,
     y  = y
@@ -352,9 +355,11 @@ dgp <- function(n){
 
 data = dgp(10000)
 
-data
+
 
 lm(y~x1, data=data)
+lm1 = data %>% lm(y~x1, data=.)
+summary(lm1)
 hist(data$x1, prob=T, breaks="FD")
 curve(dnorm(x), add=T)
 
