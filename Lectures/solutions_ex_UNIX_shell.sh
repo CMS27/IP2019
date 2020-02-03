@@ -10,6 +10,34 @@
 ############################################################
 ############################################################
 
+# Exercice 2: 
+
+ls *[AB].txt
+
+# Exercise 2:
+
+wc -l *.pdb
+wc -l *.pdb > size.txt
+sort -n lengths.txt > sorted-size.txt
+head -n 1 sorted-size.txt
+
+# 
+
+wc -l *.pdb | sort -n | head -n 1
+
+# Exercise 4:
+
+for filename in *.pdb
+do 
+echo $filename
+tail -n 5 $filename
+done
+
+for filename in *.pdb
+do 
+echo $filename
+tail -n 5 $filename | wc -l
+done
 
 # Exercise 7: select the 15 first lines of the file octane.pdb a
 # and only display the last 5:
