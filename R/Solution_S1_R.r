@@ -19,6 +19,8 @@ head(d, n = 3L)
 
 # Display the data (follow up):
 
+d
+
 d[1,1]                      # first row, first column
 d[c(1, 3, 5), c(10, 20)]    # rows (1, 3 and 5), columns (10 and 20)
 d[1, 1:5]                   # columns from (1 to 5) and row 1
@@ -35,6 +37,7 @@ rowMeans(d[c(2, 4, 10),]) # the mean inflammation for patients 2, 4 and 10
 summary(d[, 1:5])
 
 # Exercice: compute in two different ways the mean for the first 10 patients of our data 
+d[1:10,]
 
 apply(d[1:10,], 1, mean)
 rowMeans(d[1:10,])
