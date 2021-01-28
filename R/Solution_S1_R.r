@@ -9,6 +9,7 @@ weight * 2
 # Analyze data with R:
 
 # Load the data and set directory:
+
 setwd("C:/Users/cms27/Desktop/Github/IP2019/R/r-novice-inflammation-data/data")
 d = read.csv(file = "inflammation-01.csv", header = FALSE)
 
@@ -23,7 +24,7 @@ d
 
 d[1,1]                      # first row, first column
 d[c(1, 3, 5), c(10, 20)]    # rows (1, 3 and 5), columns (10 and 20)
-d[1, 1:5]                   # columns from (1 to 5) and row 1
+d[1:5, 1:2]                   # columns from (1 to 5) and row 1
 d[, 1]                      # all columns from row 1
 
 # Indexing:
@@ -227,10 +228,19 @@ for (i in 1:10){
   else{dt$x[i] = 0}
   dt$y[i] = i*i
 dt$z = dt$x + dt$y
-  }
+}
+
+dt2 <- data.frame(id = letters[1:10],
+                 x = "", y = "")
+sapply(dt2, mode)
+sapply(dt2, typeof)
+
+transform(dt2, x = as.numeric(as.character(x)))
+
+dt2$x[2] = 1
 dt
 dt$id
-typeof(dt$id)
+typeof(dt$x)
 
 ######################################################
 ## 28.04.2019 -- Econometrics
