@@ -61,7 +61,7 @@ done # end the loop
 for filename in *.pdb # For all files ending with .pdb
 do 
 echo $filename
-tail -n 5 $filename | wc -l # print number of selected lines 
+tail -n 20 $filename | wc -l # print number of selected lines 
 done
 
 ############################################################
