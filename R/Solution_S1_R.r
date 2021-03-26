@@ -2,6 +2,7 @@ install.packages('IRkernel')
 IRkernel::installspec()
 
 # R script
+w +1
 
 weight = 5
 weight * 2
@@ -24,15 +25,32 @@ d
 
 d[1,1]                      # first row, first column
 d[c(1, 3, 5), c(10, 20)]    # rows (1, 3 and 5), columns (10 and 20)
-d[1:5, 1:2]                   # columns from (1 to 5) and row 1
-d[, 1]                      # all columns from row 1
+d[1:5, 1:3]                 # row from 1 to 5 and column 1 to 3
+d[1, 1:5]                  # columns from 1 to 5 and row 1 
+d[, 1]                      # all rows from col 1
+d[1, ]                      # all column from row 1
 
 # Indexing:
+d[, 1]
 
 min(d[, 1])               # the min inflammation on day 1
+d[5, ]
 max(d[5, ])               # the max inflammation for patient 5 
+
+
+
+
+
+
+
+
+
+
+
 max(d[, c(4, 8, 12)])     # the max inflammation on days 4, 8 and 12 
-min(d[c(3, 6), 1:5])      #  the min inflammation for patients 3 and 6 from day 1 to 5
+min(d[c(3, 6), c(1,2,3,4,5)])      #  the min inflammation for patients 3 and 6 from day 1 to 5
+mean(d[2, 4])
+
 rowMeans(d[c(2, 4, 10),]) # the mean inflammation for patients 2, 4 and 10
 
 summary(d[, 1:5])
@@ -41,6 +59,7 @@ summary(d[, 1:5])
 d[1:10,]
 
 apply(d[1:10,], 1, mean)
+
 rowMeans(d[1:10,])
 
 # Plot:
