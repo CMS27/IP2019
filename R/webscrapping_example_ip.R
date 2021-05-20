@@ -14,7 +14,6 @@ library("tidyverse")
 
 url = 'https://www.lemonde.fr/'
 webpage = read_html(url)
-
 # Get the value of the accurate markup:
 title = html_nodes(webpage, '.old__top-article .article__title')
 real_title = html_text(title)
